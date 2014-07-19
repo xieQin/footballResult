@@ -72,7 +72,9 @@ class IndexAction extends BaseAction {
 		}
 		for ($i = 0; $i < $length; $i++) {
 			$res[$i]['YY'] = substr($res[$i]['YY'], 0, 3)."***".substr($res[$i]['YY'], 5, 3);
+			var_dump($res[i]['YY']);
 		}
+		var_dump($res);
 		echo json_encode($res);
 	}
 
