@@ -69,13 +69,13 @@ class IndexAction extends BaseAction {
             $res[$i]['Mobile'] = mymd5($res[$i]['Mobile'], 'DE', '898');
         }
         for($i = 0; $i < $length ; $i++) {
-            $res[$i]['Mobile'] = substr($res[$i]['Mobile'],0,3)."*****".substr($res[$i]['Mobile'],8,3);
+            $res[$i]['Mobile'] = substr($res[$i]['Mobile'],0,3)."****".substr($res[$i]['Mobile'],7,4);
         }
         for($i = 0; $i < $length ; $i++) {
             $res[$i]['YY'] = substr($res[$i]['YY'],0,3)."***".substr($res[$i]['YY'],5,3);
-            var_dump($res[i]['YY']);
+            // var_dump($res[i]['YY']);
         }
-        var_dump($res);
+        // var_dump($res);
         echo json_encode($res);
     }
 
