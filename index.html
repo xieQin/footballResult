@@ -8,9 +8,52 @@
 <script type="text/javascript" src="./assets/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="./assets/js/json2.js"></script>
 <script type="text/javascript" src="./assets/js/tools.js"></script>
+<script type="text/javascript" src="./assets/js/quickpager.jquery.js"></script>
+<style type="text/css">
+ul.simplePagerNav li{
+    display:inline;
+    position: relative;
+    left: 60%;
+    padding: 5px;
+    margin: 0;
+    font-family: georgia;
+    text-align: center;
+}
+
+ul.simplePagerNav li a{
+    color: #ccc;
+    text-decoration: none;
+}
+
+/*li.currentPage {
+  background: red;
+        background: #83bd63;
+}*/
+
+ul.simplePagerNav li.currentPage a {
+  color: red;
+}
+
+table.pageme {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+table.pageme td {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+ul.paging  li.sticky {
+  background-color: red !important;
+  display: block !important
+}
+
+
+</style>
 </head>
 
-<body>  
+<body>
   <!--  banner 开始  -->
   <div class="banner"></div>  
   <!--  banner 结束  -->
@@ -22,7 +65,7 @@
     <!-- 表头 开始 -->
       <ul>
         <li class="width360"> <img src="assets/images/a.png" border="0" /> </li>
-        <li class="width280"> <img src="assets/images/b.png" border="0" /> </li>
+        <!-- <li class="width280"> <img src="assets/images/b.png" border="0" /> </li> -->
         <li class="width280"> <img src="assets/images/c.png" border="0" /> </li>
         <li class="width280"> <img src="assets/images/d.png" border="0" /> </li>
       </ul>
@@ -32,10 +75,9 @@
     <!-- 十六强2~3组 开始-->
       <ul class="table_winer">
         <li class="tit1 m_pic"><img src="assets/images/1.png" border="0" /></li>
-        <li class="lists1">
-          <ul id="first">
+          <ul id="first" class="lists1">
           </ul>
-        </li>
+          <div class="pagecount"></div>
       </ul>
      <!-- 十六强2~3组 结束-->  
      
@@ -43,10 +85,8 @@
     <!-- 十六强4~5组 开始-->      
       <ul class="table_winer">
         <li class="tit1 m_pic"><img src="assets/images/2.png" border="0" /></li>
-        <li class="lists1">
-          <ul id="second">
+          <ul id="second" class="lists1">
           </ul>
-        </li>
       </ul>
      <!-- 十六强4~5组 结束--> 
      
@@ -54,10 +94,8 @@
     <!-- 四强猜对2组 开始-->      
       <ul class="table_winer">
         <li class="tit1 m_pic"><img src="assets/images/3.png" border="0" /></li>
-        <li class="lists1">
-          <ul id="cFirst">
+          <ul id="cFirst" class="lists1">
           </ul>
-        </li>
       </ul>
      <!-- 四强猜对2组 结束--> 
      
@@ -65,10 +103,8 @@
     <!-- 四强猜对3组 开始-->      
       <ul class="table_winer">
         <li class="tit1 m_pic"><img src="assets/images/4.png" border="0" /></li>
-        <li class="lists1">
-          <ul id="cSecond">
+          <ul id="cSecond" class="lists1">
           </ul>
-        </li>
       </ul>
      <!-- 四强猜对3组 结束--> 
      
@@ -76,37 +112,66 @@
     <!-- 四强猜对4组 开始-->      
       <ul class="table_winer">
         <li class="tit1 m_pic"><img src="assets/images/5.png" border="0" /></li>
-        <li class="lists1">
-          <ul id="cThird">
+          <ul id="cThird" class="lists1">
           </ul>
-        </li>
       </ul>
      <!-- 四强猜对4组 结束--> 
      
      
-    <!-- 锦囊猜四强 开始-->      
+    <!-- 锦囊猜四强 开始-->
+    <ul>
+        <li class="width360"></li>
+        <li class="width280"> <img src="assets/images/b.png" border="0" />
+        <li class="width280"> <img src="assets/images/c.png" border="0" /> </li>
+        <!-- <li class="width280"> <img src="assets/images/d.png" border="0" /> </li> -->
+      </ul>      
       <ul class="table_winer">
         <li class="tit1 m_pic" style="padding-bottom:100px;"><img src="assets/images/6.png" border="0" /></li>
         <li class="lists1">
           <ul>
-           <li>蔡依林</li>
-           <li>5165469</li>
-           <li>138*****888</li>
-           
-           <li>蔡依林</li>
-           <li>5165469</li>
-           <li>138*****888</li>
+           <li>步步为盈之风寒</li>
+           <li>***********</li>
+           <li>胜顺</li>
+           <li>93***4878</li>
+           <li>小白的星巴克</li>
+           <li>96***9637</li>
+           <li>1588</li>
+           <li>96***0183</li>
+           <li>瓷器</li>
+           <li>*********</li>
+           <li>亦步亦趋</li>
+           <li>*********</li>
+           <li>多空博弈</li>
+           <li>*********</li>
+           <li>见心</li>
+           <li>*********</li>
+           <li>仙人掌</li>
+           <li>*********</li>
+           <li>川狂人</li>
+           <li>*********</li>
           </ul>
         </li>
       </ul>
      <!-- 锦囊猜四强 结束--> 
      
      
-    <!-- 冠军 开始-->      
+    <!-- 冠军 开始-->
+    <ul>
+        <li class="width360"> </li>
+        <!-- <li class="width280"> <img src="assets/images/b.png" border="0" /> </li> -->
+        <li class="width280"> <img src="assets/images/c.png" border="0" /> </li>
+        <li class="width280"> <img src="assets/images/d.png" border="0" /> </li>
+      </ul>      
       <ul class="table_winer">
         <li class="tit1"><img src="assets/images/7.png" border="0" /></li>
         <li class="lists1">
-          <ul id="cFourth">
+          <ul>
+          <li>81***4081</li>
+          <li>132***4000*</li>
+          <li>90***6567</li>
+          <li>138***3826*</li>
+          <li>***</li>
+          <li>150***0784*</li>
           </ul>
         </li>
       </ul>

@@ -19,11 +19,9 @@ $(document).ready(function($) {
     var record4 = 0;
     var record5 = 0;
     var record6 = 0;
-    var record7 = 0;
-    var record8 = 0;
 	var url_lv = '';
-	var divhight;
-	var showtimes;
+    var curPage = 1;
+    var total,pageSize,totalPage;
 
 	getUrl();
 
@@ -34,107 +32,140 @@ $(document).ready(function($) {
         url_lv = v.substring(0, index);
     }
 
-    $.getJSON(url_lv + '/service/index.php/Index/getVotResult', function(data) {
-    	var result = data;
-    	var firsthtml = '';
-    	var secondhtml = '';
-    	checkResult(result);
-    	$.each(first,function(i,item) {
-    		firsthtml += '<div><li>' + item.Name + '</li><li>' + item.YY + '</li><li>' + item.Mobile + '</li></div>';
+    // function getData(page) {
+    //     $.ajax({
+    //         url: url_lv + '/2014/index.php/Index/getVotResult',
+    //         type: 'post',
+    //         dataType: 'json',
+    //         data: {'pageNum': page - 1},
+    //         beforeSend:function() {
+    //             $("#first").append("<li>loading...</li>");
+    //         },
+    //         success:function(data) {
+    //             $("#first").empty();
+    //             total = data.total;
+    //             pageSize = data.pageSize;
+    //             curPage = page;
+    //             totalPage = data.totalPage;
+    //         }
+    // }
 
-    	})
-    	$.each(second,function(i,item) {
-    		secondhtml += '<div><li>' + item.Name + '</li><li>' + item.YY + '</li><li>' + item.Mobile + '</li></div>';
+    $.getJSON(url_lv + '/2014/index.php/Index/getVotResult', function(data) {
+        var result = data;
+        var firsthtml = '';
+        var secondhtml = '';
+        checkResult(result);
+        $.each(first,function(i,item) {
+            firsthtml += '<li>' + item.YY + '</li><li>' + item.Mobile + '</li>';
 
-    	})
-    	$("#first").append($(firsthtml)).hide();
-    	$("#second").append($(secondhtml)).hide();
-    	var len1 = ($("#first").find("div").length);
-        var num1 = 0;
-        setInterval(function(){
-        	$("#first").show();
-            $("#first").find("div").eq(num1).show().siblings().hide();
-            $("#first").find("div").eq((num1+1)%len1).show();
-            $("#first").find("div").eq((num1+2)%len1).show();
-            $("#first").find("div").eq((num1+3)%len1).show();
-            if(num1+3<len1){
-                num1 ++;
-            }else{
-                num1 = 0;
-            }
-        },1000);
+        })
+        $.each(second,function(i,item) {
+            secondhtml += '<li>' + item.YY + '</li><li>' + item.Mobile + '</li>';
 
-        var len2 = ($("#second").find("div").length);
-        var num2= 0;
-        setInterval(function(){
-        	$("#second").show();
-                $("#second").find("div").eq(num2).show().siblings().hide();
-                $("#second").find("div").eq((num2+1)%len2).show();
-                if(num2+1<len2){
-                        num2++;
-                }else{
-                        num2 = 0;
-                }
-        },1000);
+        })
+        $("#first").append($(firsthtml)).hide();
+        $("#first").quickPager();
+        $("#first").show();
+        $("#second").append($(secondhtml)).hide();
+        $("#second").quickPager();
+        $("#second").show();
+    	// var len1 = ($("#first").find("div").length);
+     //    var num1 = 0;
+     //    setInterval(function(){
+     //    	$("#first").show();
+     //        $("#first").find("div").eq(num1).show().siblings().hide();
+     //        $("#first").find("div").eq((num1+1)%len1).show();
+     //        $("#first").find("div").eq((num1+2)%len1).show();
+     //        $("#first").find("div").eq((num1+3)%len1).show();
+     //        if(num1+3<len1){
+     //            num1 ++;
+     //        }else{
+     //            num1 = 0;
+     //        }
+     //    },1000);
+
+     //    var len2 = ($("#second").find("div").length);
+     //    var num2= 0;
+     //    setInterval(function(){
+     //    	$("#second").show();
+     //            $("#second").find("div").eq(num2).show().siblings().hide();
+     //            $("#second").find("div").eq((num2+1)%len2).show();
+     //            if(num2+1<len2){
+     //                    num2++;
+     //            }else{
+     //                    num2 = 0;
+     //            }
+     //    },1000);
     })
 
-    $.getJSON(url_lv + '/service/index.php/Index/getVotResult', function(data) {
-    	var result = data;
-    	var cFirsthtml = '';
-    	var cSecondhtml = '';
-    	checkResult(result);
-    	$.each(first,function(i,item) {
-    		cFirsthtml += '<div><li>' + item.Name + '</li><li>' + item.YY + '</li><li>' + item.Mobile + '</li></div>';
+    $.getJSON(url_lv + '/2014-2/index.php/Index/getVotResult', function(data) {
+        var result = data;
+        var cFirsthtml = '';
+        var cSecondhtml = '';
+        var cThirdhtml = '';
+        checkCResult(result);
+        $.each(cFirst,function(i,item) {
+            cFirsthtml += '<li>' + item.YY + '</li><li>' + item.Mobile + '</li>';
 
-    	})
-    	$.each(second,function(i,item) {
-    		cSecondhtml += '<div><li>' + item.Name + '</li><li>' + item.YY + '</li><li>' + item.Mobile + '</li></div>';
+        })
+        $.each(cSecond,function(i,item) {
+            cSecondhtml += '<li>' + item.YY + '</li><li>' + item.Mobile + '</li>';
 
-    	})
-    	$("#cFirst").append($(cFirsthtml)).hide();
-    	$("#cSecond").append($(cSecondhtml)).hide();
-    	$("#cThird").append($(cSecondhtml)).hide();
-    	var len1 = ($("#cFirst").find("div").length);
-        var num1 = 0;
-        setInterval(function(){
-        	$("#cFirst").show();
-            $("#cFirst").find("div").eq(num1).show().siblings().hide();
-            $("#cFirst").find("div").eq((num1+1)%len1).show();
-            $("#cFirst").find("div").eq((num1+2)%len1).show();
-            $("#cFirst").find("div").eq((num1+3)%len1).show();
-            if(num1+3<len1){
-                num1 ++;
-            }else{
-                num1 = 0;
-            }
-        },1000);
+        })
+        $.each(cThird,function(i,item) {
+            cThirdhtml += '<li>' + item.YY + '</li><li>' + item.Mobile + '</li>';
 
-        var len2 = ($("#cSecond").find("div").length);
-        var num2= 0;
-        setInterval(function(){
-        	$("#cSecond").show();
-                $("#cSecond").find("div").eq(num2).show().siblings().hide();
-                $("#cSecond").find("div").eq((num2+1)%len2).show();
-                if(num2+1<len2){
-                        num2++;
-                }else{
-                        num2 = 0;
-                }
-        },1000);
-
-        var num3= 0;
-        setInterval(function(){
-        	$("#cThird").show();
-                $("#cThird").find("div").eq(num3).show().siblings().hide();
-                $("#cThird").find("div").eq((num3+1)%len2).show();
-                if(num3+1<len2){
-                        num3++;
-                }else{
-                        num3 = 0;
-                }
-        },1000);
+        })
+        $("#cFirst").append($(cFirsthtml)).hide();
+        $("#cFirst").quickPager();
+        $("#cFirst").show();
+        $("#cSecond").append($(cSecondhtml)).hide();
+        $("#cSecond").quickPager();
+        $("#cSecond").show();
+        $("#cThird").append($(cThirdhtml)).hide();
+        $("#cThird").quickPager();
+        $("#cThird").show();
 
     })
+    	// var len1 = ($("#cFirst").find("div").length);
+     //    var num1 = 0;
+     //    setInterval(function(){
+     //    	$("#cFirst").show();
+     //        $("#cFirst").find("div").eq(num1).show().siblings().hide();
+     //        $("#cFirst").find("div").eq((num1+1)%len1).show();
+     //        $("#cFirst").find("div").eq((num1+2)%len1).show();
+     //        $("#cFirst").find("div").eq((num1+3)%len1).show();
+     //        if(num1+3<len1){
+     //            num1 ++;
+     //        }else{
+     //            num1 = 0;
+     //        }
+     //    },1000);
+
+     //    var len2 = ($("#cSecond").find("div").length);
+     //    var num2= 0;
+     //    setInterval(function(){
+     //    	$("#cSecond").show();
+     //            $("#cSecond").find("div").eq(num2).show().siblings().hide();
+     //            $("#cSecond").find("div").eq((num2+1)%len2).show();
+     //            if(num2+1<len2){
+     //                    num2++;
+     //            }else{
+     //                    num2 = 0;
+     //            }
+     //    },1000);
+
+     //    var num3= 0;
+     //    setInterval(function(){
+     //    	$("#cThird").show();
+     //            $("#cThird").find("div").eq(num3).show().siblings().hide();
+     //            $("#cThird").find("div").eq((num3+1)%len2).show();
+     //            if(num3+1<len2){
+     //                    num3++;
+     //            }else{
+     //                    num3 = 0;
+     //            }
+     //    },1000);
 
     function checkResult(result) {
     	for(var i = 0; i < result.length; i++) {

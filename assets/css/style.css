@@ -57,7 +57,7 @@ body {
 }
 
 .table1 .width280{
-	width:280px;
+	width:420px;
 }
 
 
@@ -99,7 +99,7 @@ body {
 
 .lists1:after{content:"."; display:block; height:0; clear:both; visibility:hidden;}
 
-.table_winer .lists1 ul{
+.table_winer .lists1{
 	width:/*900*/840px;
 	height:100%;
 	margin:0;
@@ -107,8 +107,8 @@ body {
 	float:left;
 }
 
-.table_winer .lists1  li{
-	width:/*300*/280px;
+.table_winer .lists1 li{
+	width:/*300*/420px;
 	height:44px;
 	line-height:44px;
 	color:#fff;
@@ -143,5 +143,39 @@ body {
 	text-align:left;
 	margin:0 auto;
 	padding:0;
+}
+
+ul.simplePagerNav li{
+    display:inline;
+    position: relative;
+    left: 60%;
+    padding: 5px;
+    margin: 0;
+    font-family: georgia;
+    text-align: center;
+}
+
+ul.simplePagerNav li a{
+    color: #ccc;
+    text-decoration: none;
+}
+
+ul.simplePagerNav li.currentPage a {
+  color: red;
+}
+
+table.pageme {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+table.pageme td {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+ul.paging  li.sticky {
+  background-color: red !important;
+  display: block !important
 }
 
